@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------
+﻿//-----------------------------------------------------------------
 //  Sprite (part of SpriteManager) v0.64 (21-10-2012)
 //  Copyright 2012 Brady Wright and Above and Beyond Software
 //  All rights reserved

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------
+﻿//-----------------------------------------------------------------
 //  LinkedSpriteManager v0.64 (21-10-2012)
 //  Copyright 2012 Brady Wright and Above and Beyond Software
 //  All rights reserved
@@ -16,6 +16,7 @@ using System.Collections;
 // translations and rotations of the client GameObjects to the
 // associated sprite - meaning the client need not worry about
 // micromanaging all transformations:
+[ExecuteInEditMode]
 public class LinkedSpriteManager : SpriteManager
 {
     Transform t;
