@@ -124,6 +124,11 @@ public class SpriteManager : MonoBehaviour
     //--------------------------------------------------------------
     void Awake()
     {
+#if  UNITY_EDITOR
+        // delete components on load to make unity happy
+        DestroyImmediate(gameObject.GetComponent<MeshFilter>());
+        DestroyImmediate(gameObject.GetComponent<MeshRenderer>());
+#endif
         gameObject.AddComponent("MeshFilter");
         gameObject.AddComponent("MeshRenderer");
 
@@ -131,8 +136,7 @@ public class SpriteManager : MonoBehaviour
         meshRenderer = (MeshRenderer)GetComponent(typeof(MeshRenderer));
 
         meshRenderer.renderer.material = material;
-
-        mesh = meshFilter.sharedMesh;
+        mesh = meshFilter.mesh;     
 
         // Create our first batch of sprites:
         EnlargeArrays(allocBlockSize);

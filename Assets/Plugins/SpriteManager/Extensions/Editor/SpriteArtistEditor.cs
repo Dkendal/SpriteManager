@@ -7,11 +7,11 @@ using System.Collections;
 public class SpriteArtistEditor : Editor
 {
 
-    SpriteArtist myTarget;
+    //SpriteArtist myTarget;
 
     public override void OnInspectorGUI()
     {
-        myTarget = (SpriteArtist)target;
+        //myTarget = (SpriteArtist)target;
         
     }
 }
