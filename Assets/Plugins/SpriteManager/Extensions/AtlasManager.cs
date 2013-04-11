@@ -9,46 +9,27 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
-using System.IO;
 using MiniJSON;
-using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class AtlasManager : MonoBehaviour
 {
-    public string AtlasData;
+    public TextAsset AtlasConfigFile;
     public Rect[] Frames { get; private set; }
-
+    
     // Use this for initialization
     private void Awake()
     {
-        var manager = gameObject.GetComponent<SpriteManager>();
-        if (AtlasData == null)
-        {
-            // get the file path to the text image, then replace the file extension with txt, assuming that
-            // the atlas and its data file have the same name
-            AtlasData = AssetDatabase.GetAssetPath(manager.material.mainTexture);
-            Debug.Log(AtlasData);
-            int index = AtlasData.LastIndexOf('.');
-            AtlasData = AtlasData.Substring(0, index) + @".txt";
-        }
-        try
-        {
-            ReadFile(AtlasData);
-        }
-        catch (FileNotFoundException e)
-        {
-            Debug.Log(e.Message);
-            Debug.Break();
-        }
+        BuildAtlasFromFile(AtlasConfigFile);
     }
 
-    private void ReadFile(string uri)
+    private void BuildAtlasFromFile(TextAsset asset)
     {
-        var jsonString = File.ReadAllText(uri);
+        if (asset == null) return;
+
+        var jsonString = asset.text;
         var frameDict =
             ((Dictionary<string, object>) Json.Deserialize(jsonString))["frames"] as Dictionary<string, object>;
         Frames = new Rect[frameDict.Count];

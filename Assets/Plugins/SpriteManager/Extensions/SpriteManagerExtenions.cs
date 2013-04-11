@@ -10,12 +10,15 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 public static class SpriteManagerExtensions
 {
     public static AtlasManager GetAtlasManager(this SpriteManager _this)
     {
-        return _this.gameObject.GetComponent<AtlasManager>() ?? _this.gameObject.AddComponent<AtlasManager>();
+        var atlas = _this.gameObject.AddComponent<AtlasManager>();
+        Debug.Assert(atlas != null, "atlas != null");
+        return atlas;
     }
 
     public static Rect PixelCoordToUVCoord(this SpriteManager _this, Rect r)
